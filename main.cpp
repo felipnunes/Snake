@@ -25,8 +25,8 @@ int main() {
         window.clear(); // clear the old frame
 
         //.......here you draw your game.......//
-
-        viper->refresh();
+        viper->drawSnake(&window);
+        //viper->refresh();
 
         window.display(); // tell app that is done drawing
 

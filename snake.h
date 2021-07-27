@@ -13,18 +13,25 @@ class snake {
     void refresh();
     void addHead();
     void popHead();
-
+    void drawSnake(sf::Window *window);
 };
 
 snake::snake(sf::Window *window) {
-    snake_slice.setFillColor(sf::Color::Yellow);
-    snake_slice.setScale(sf::Vector2f(slice_size,slice_size));
+    this->snake_slice.setFillColor(sf::Color::Yellow);
+    this->snake_slice.setScale(sf::Vector2f(slice_size,slice_size));
     for(int i = 0; i < snake_inicial_lenght; i++) {
-        shape.push_back(snake_slice);
+        this->shape.push_back(snake_slice);
+        this->shape[i].setPosition(sf::Vector2f(window->getSize().x/2 + slice_size * i,window->getSize().y/2));
     }
 }
 
 void snake::refresh() {
-    this->addHead();
-    this->popHead();
+    //this->addHead();
+    //this->popHead();
+}
+
+void snake::drawSnake(sf::Window *window) {
+    sf::Window *ponteiro = window;
+    for(int i = 0; i < this->shape.size(); i++) {
+    }
 }
