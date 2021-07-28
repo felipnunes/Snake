@@ -8,6 +8,8 @@ int main() {
     window.setVerticalSyncEnabled(true);
     snake *viper = new snake(window);
     
+    const unsigned int delay = 10;
+    unsigned int tick = 0;
     
     while(window.isOpen()) {
         sf::Event event;
@@ -18,16 +20,17 @@ int main() {
                 window.close();
             }
         }
+        
+        if (tick % delay != 0) {
+            tick++;
+            continue;
+        } else {
+            tick = 0;
+        }
+        
+        viper->refresh(); // Updating
 
-        //Updating
-
-        //Render
-       // window.clear(); // clear the old frame
-
-        //.......here you draw your game.......//
-        viper->refresh();
-
-        window.display(); // tell app that is done drawing
+        window.display(); // Rendering
 
     }
     return 0;
