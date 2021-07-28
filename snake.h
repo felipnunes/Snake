@@ -6,31 +6,43 @@ const int slice_size = 20;
 
 class snake {
     public:
-    sf::RenderWindow *window_p;
-    snake(sf::RenderWindow &window);
     int snake_inicial_lenght = 3;
+    char actual_direction = 'W';
+    int head_position_x;
+    int head_position_y;
+    sf::RenderWindow *window_p;
     sf::RectangleShape snake_slice;
     std::vector<sf::RectangleShape> shape;
+
+    snake(sf::RenderWindow &window);
     void refresh();
-    void addHead();
-    void popHead();
+    void addHead(char direction);
+    void popTale();
     void drawSnake();
+    void checkControls();
 };
 
 snake::snake(sf::RenderWindow &window) {
     this->window_p = &window;
+    //define snake_slice
     this->snake_slice.setFillColor(sf::Color::Yellow);
     this->snake_slice.setSize(sf::Vector2f(slice_size,slice_size));
+    //starts inicial snake
     for(int i = 0; i < snake_inicial_lenght; i++) {
         this->shape.push_back(snake_slice);
         this->shape[i].setPosition(sf::Vector2f(window_p->getSize().x/2 + slice_size * i,window_p->getSize().y/2));
     }
+    //remember head's position
+    this->head_position_x = this->shape.back().getPosition().x;
+    this->head_position_y = this->shape.back().getPosition().y;
 }
 
 void snake::refresh() {
     this->drawSnake();
-    //this->addHead();
-    //this->popHead();
+    this->checkControls();
+    this->addHead(actual_direction);
+    //this->popTale();
+    std::cout << actual_direction << " ";
 }
 
 void snake::drawSnake() {
@@ -39,6 +51,37 @@ void snake::drawSnake() {
     }
 }
 
-void snake::addHead() {
-    
+void snake::checkControls() {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        this->actual_direction = 'W';
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        this->actual_direction = 'A';
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        this->actual_direction = 'S';
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        this->actual_direction = 'D';
+    }
+}
+
+void snake::addHead(char direction) {
+    if(direction == 'W') {
+        this->shape.push_back(snake_slice);
+        this->shape.back().setPosition(sf::Vector2f(head_position_x,head_position_y - slice_size));
+        head_position_y -= slice_size;
+    }
+    else if(direction == 'A') {
+        
+    }
+    else if(direction == 'S') {
+        
+    }
+    else if(direction == 'D') {
+        
+    }
+}
+void snake::popTale() {
+    this->shape.front();
 }
