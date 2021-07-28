@@ -21,17 +21,12 @@ int main() {
             }
         }
         
-        if (tick % delay != 0) {
-            tick++;
-            continue;
-        } else {
+        if (tick % delay) {
+            viper->refresh(); // Updating
+            window.display(); // Rendering
             tick = 0;
         }
-        
-        viper->refresh(); // Updating
-
-        window.display(); // Rendering
-
+        tick++;
     }
     return 0;
 }
