@@ -32,3 +32,5 @@ int main() {
     }
     return 0;
 }
+
+//g++ -c main.cpp && g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio && sfml-app.exe

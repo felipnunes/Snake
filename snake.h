@@ -41,8 +41,7 @@ void snake::refresh() {
     this->drawSnake();
     this->checkControls();
     this->addHead(actual_direction);
-    //this->popTale();
-    std::cout << actual_direction << " ";
+    this->popTale();
 }
 
 void snake::drawSnake() {
@@ -67,21 +66,24 @@ void snake::checkControls() {
 }
 
 void snake::addHead(char direction) {
+    this->shape.push_back(snake_slice);
     if(direction == 'W') {
-        this->shape.push_back(snake_slice);
         this->shape.back().setPosition(sf::Vector2f(head_position_x,head_position_y - slice_size));
         head_position_y -= slice_size;
     }
     else if(direction == 'A') {
-        
+        this->shape.back().setPosition(sf::Vector2f(head_position_x - slice_size,head_position_y));
+        head_position_x -= slice_size;
     }
     else if(direction == 'S') {
-        
+        this->shape.back().setPosition(sf::Vector2f(head_position_x,head_position_y + slice_size));
+        head_position_y += slice_size;
     }
     else if(direction == 'D') {
-        
+        this->shape.back().setPosition(sf::Vector2f(head_position_x + slice_size,head_position_y - slice_size));
+        head_position_x += slice_size;
     }
 }
 void snake::popTale() {
-    this->shape.front();
+    this->shape.erase(this->shape.begin());
 }
