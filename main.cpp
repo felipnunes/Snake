@@ -6,7 +6,7 @@ int main() {
 
     sf::RenderWindow window(sf::VideoMode(1000,1000), "Snake");
     window.setVerticalSyncEnabled(true);
-    snake *viper = new snake(&window);
+    snake *viper = new snake(window);
     
     
     while(window.isOpen()) {
@@ -22,11 +22,10 @@ int main() {
         //Updating
 
         //Render
-        window.clear(); // clear the old frame
+       // window.clear(); // clear the old frame
 
         //.......here you draw your game.......//
-        viper->drawSnake(&window);
-        //viper->refresh();
+        viper->refresh();
 
         window.display(); // tell app that is done drawing
 
