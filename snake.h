@@ -7,7 +7,7 @@ const int slice_size = 20;
 class snake {
     public:
     int snake_inicial_lenght = 3;
-    char actual_direction = 'W';
+    char actual_direction = 'D';
     int head_position_x;
     int head_position_y;
     sf::RenderWindow *window_p;
@@ -80,10 +80,11 @@ void snake::addHead(char direction) {
         head_position_y += slice_size;
     }
     else if(direction == 'D') {
-        this->shape.back().setPosition(sf::Vector2f(head_position_x + slice_size,head_position_y - slice_size));
+        this->shape.back().setPosition(sf::Vector2f(head_position_x + slice_size,head_position_y));
         head_position_x += slice_size;
     }
 }
 void snake::popTale() {
     this->shape.erase(this->shape.begin());
+    //this->shape.pop_back();
 }
