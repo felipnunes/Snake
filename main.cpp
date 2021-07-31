@@ -1,13 +1,15 @@
+  
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cstdlib>
 #include "snake.h"
+#include <windows.h>
 
 int main() {
 
     sf::RenderWindow window(sf::VideoMode(1000,1000), "Snake");
     window.setVerticalSyncEnabled(true);
     snake *viper = new snake(window);
-    
     
     while(window.isOpen()) {
         sf::Event event;
@@ -18,19 +20,15 @@ int main() {
                 window.close();
             }
         }
+        window.clear();
 
-        //Updating
+        viper->refresh(); // Updating
 
-        //Render
-       // window.clear(); // clear the old frame
-
-        //.......here you draw your game.......//
-        viper->refresh();
-
-        window.display(); // tell app that is done drawing
-
+        window.display(); // Rendering
+        Sleep(50);
     }
+
     return 0;
 }
 
-//g++ -c main.cpp && g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio && sfml-app.exe
+//g++ -c main.cpp && g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio && ./sfml-app.exe

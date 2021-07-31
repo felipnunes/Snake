@@ -38,15 +38,15 @@ snake::snake(sf::RenderWindow &window) {
 }
 
 void snake::refresh() {
-    this->drawSnake();
     this->checkControls();
-    this->addHead(actual_direction);
     this->popTale();
+    this->addHead(actual_direction);
+    this->drawSnake();
 }
 
 void snake::drawSnake() {
-    for(int i = 0; i < this->shape.size(); i++) {
-        this->window_p->draw(shape[i]);
+    for (const auto &shape : this->shape) {
+        this->window_p->draw(shape);
     }
 }
 
@@ -84,7 +84,7 @@ void snake::addHead(char direction) {
         head_position_x += slice_size;
     }
 }
+
 void snake::popTale() {
     this->shape.erase(this->shape.begin());
-    //this->shape.pop_back();
 }
