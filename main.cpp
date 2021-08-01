@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "snake.h"
+#include "food.h"
 #include <windows.h>
 
 int main() {
@@ -10,6 +11,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(1000,1000), "Snake");
     window.setVerticalSyncEnabled(true);
     snake *viper = new snake(window);
+    food *fruit = new food(window);
     
     while(window.isOpen()) {
         sf::Event event;
@@ -23,6 +25,7 @@ int main() {
         window.clear();
 
         viper->refresh(); // Updating
+        window.draw(fruit->actual_food);
 
         window.display(); // Rendering
         Sleep(50);
