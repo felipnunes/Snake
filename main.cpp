@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include "snake.h"
 #include "food.h"
-#include <windows.h>
 
 int main() {
 
@@ -26,9 +25,9 @@ int main() {
 
         viper->refresh(); // Updating
         window.draw(fruit->actual_food);
-
+        fruit->randomizer();
         window.display(); // Rendering
-        Sleep(50);
+        //Sleep(50);
     }
 
     return 0;
