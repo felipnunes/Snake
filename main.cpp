@@ -32,9 +32,9 @@ int main() {
 
         viper->refresh(fruit->actual_food.getPosition().x, fruit->actual_food.getPosition().y); // Updating
         window.draw(fruit->actual_food);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            fruit->randomizer();
-        }
+        fruit->refresh(viper->head_position_x, viper->head_position_y);
+
+
         window.display(); // Rendering
     }
 
