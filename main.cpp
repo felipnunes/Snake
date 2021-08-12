@@ -5,16 +5,24 @@
 #include "snake.h"
 #include "food.h"
 
+
 int main() {
+    int game_refresh_rate = 10;
 
     sf::RenderWindow window(sf::VideoMode(1000,1000), "Snake");
-    window.setVerticalSyncEnabled(true);
+    //window.setVerticalSyncEnabled(true);
+    window.setFramerateLimit(game_refresh_rate);
     snake *viper = new snake(window);
     food *fruit = new food(window);
+
+
     
     while(window.isOpen()) {
-        sf::Event event;
 
+       
+
+
+        sf::Event event;
         //event polling
         while(window.pollEvent(event)) {
             if(event.key.code == sf::Keyboard::Escape || event.type == sf::Event::Closed) {
@@ -33,4 +41,4 @@ int main() {
     return 0;
 }
 
-//g++ -c main.cpp && g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio && ./sfml-app.exe
+//g++ -c main.cpp && g++ main.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio && ./sfml-app

@@ -6,7 +6,7 @@ const int slice_size = 20;
 
 class snake {
     public:
-    int snake_inicial_lenght = 3;
+    int snake_inicial_lenght = 20;
     char actual_direction = 'D';
     int head_position_x;
     int head_position_y;
