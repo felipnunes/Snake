@@ -7,7 +7,7 @@
 
 
 int main() {
-    int game_refresh_rate = 15;
+    int game_refresh_rate = 24;
 
     sf::RenderWindow window(sf::VideoMode(1000,1000), "Snake");
     window.setFramerateLimit(game_refresh_rate);

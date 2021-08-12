@@ -6,7 +6,7 @@ const int slice_size = 20;
 
 class snake {
     public:
-    int snake_inicial_lenght = 10;
+    int snake_inicial_lenght = 4;
     char actual_direction = 'D';
     int head_position_x;
     int head_position_y;
@@ -15,7 +15,7 @@ class snake {
     std::vector<sf::RectangleShape> shape;
 
     snake(sf::RenderWindow &window);
-    void refresh(int x, int y);
+    void refresh(float x, float y);
     void addHead(char direction);
     void popTale();
     void drawSnake();
@@ -37,15 +37,12 @@ snake::snake(sf::RenderWindow &window) {
     this->head_position_y = this->shape.back().getPosition().y;
 }
 
-void snake::refresh(int x, int y) {
+void snake::refresh(float x, float y) {
     this->checkControls();
-    if(this->head_position_x == x && this->head_position_y == y) {
-
-    }
-    else {
-        this->popTale();
-    }
     this->addHead(actual_direction);
+    if(!(this->head_position_x == x && this->head_position_y == y)) {
+       this->popTale();
+    }
     this->drawSnake();
 }
 
