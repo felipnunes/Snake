@@ -7,7 +7,7 @@
 
 
 int main() {
-    int game_refresh_rate = 10;
+    int game_refresh_rate = 15;
 
     sf::RenderWindow window(sf::VideoMode(1000,1000), "Snake");
     window.setFramerateLimit(game_refresh_rate);
@@ -30,7 +30,7 @@ int main() {
         }
         window.clear();
 
-        viper->refresh(); // Updating
+        viper->refresh(fruit->actual_food.getPosition().x, fruit->actual_food.getPosition().y); // Updating
         window.draw(fruit->actual_food);
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             fruit->randomizer();
