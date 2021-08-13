@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
 
@@ -6,6 +7,8 @@ const int slice_size = 20;
 
 class snake {
     public:
+    sf::SoundBuffer bite_buffer;
+    sf::Sound bite_sound;
     int snake_inicial_lenght = 4;
     char actual_direction = 'D';
     int head_position_x;
@@ -20,10 +23,16 @@ class snake {
     void popTale();
     void drawSnake();
     void checkControls();
+    void playSound();
 };
 
 snake::snake(sf::RenderWindow &window) {
     this->window_p = &window;
+
+    //define bite sound
+    bite_buffer.loadFromFile("bite_sound.wav");
+    bite_sound.setBuffer(bite_buffer);
+
     //define snake_slice
     this->snake_slice.setFillColor(sf::Color::Yellow);
     this->snake_slice.setSize(sf::Vector2f(slice_size,slice_size));
@@ -42,6 +51,9 @@ void snake::refresh(float x, float y) {
     this->addHead(actual_direction);
     if(!(this->head_position_x == x && this->head_position_y == y)) {
        this->popTale();
+    }
+    else {
+        playSound();
     }
     this->drawSnake();
 }
@@ -89,4 +101,8 @@ void snake::addHead(char direction) {
 
 void snake::popTale() {
     this->shape.erase(this->shape.begin());
+}
+
+void snake::playSound() {
+    bite_sound.play();
 }
