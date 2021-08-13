@@ -7,7 +7,7 @@
 
 
 int main() {
-    int game_refresh_rate = 24;
+    int game_refresh_rate = 15;
 
     sf::RenderWindow window(sf::VideoMode(1000,1000), "Snake");
     window.setFramerateLimit(game_refresh_rate);
@@ -30,7 +30,7 @@ int main() {
         }
         window.clear();
 
-        viper->refresh(fruit->actual_food.getPosition().x, fruit->actual_food.getPosition().y); // Updating
+        viper->refresh(fruit->actual_food.getPosition().x, fruit->actual_food.getPosition().y, &window, &game_refresh_rate); // Updating
         window.draw(fruit->actual_food);
         fruit->refresh(viper->head_position_x, viper->head_position_y);
 

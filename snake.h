@@ -4,9 +4,10 @@
 #include <vector>
 
 const int slice_size = 20;
-
+const int frame_rate_increment = 2;
 class snake {
     public:
+    int points;
     sf::SoundBuffer bite_buffer;
     sf::Sound bite_sound;
     int snake_inicial_lenght = 4;
@@ -18,17 +19,19 @@ class snake {
     std::vector<sf::RectangleShape> shape;
 
     snake(sf::RenderWindow &window);
-    void refresh(float x, float y);
+    void refresh(float x, float y, sf::RenderWindow *window, int *actual_frame_rate);
     void addHead(char direction);
     void popTale();
     void drawSnake();
     void checkControls();
     void playSound();
+    void frameRateAjust(sf::RenderWindow &window, int &actual_frame_rate);
 };
 
 snake::snake(sf::RenderWindow &window) {
     this->window_p = &window;
-
+    //define inicial points
+    points = 0;
     //define bite sound
     bite_buffer.loadFromFile("bite_sound.wav");
     bite_sound.setBuffer(bite_buffer);
@@ -46,15 +49,20 @@ snake::snake(sf::RenderWindow &window) {
     this->head_position_y = this->shape.back().getPosition().y;
 }
 
-void snake::refresh(float x, float y) {
+void snake::refresh(float x, float y, sf::RenderWindow *window, int *actual_frame_rate) {
     this->checkControls();
     this->addHead(actual_direction);
+
     if(!(this->head_position_x == x && this->head_position_y == y)) {
        this->popTale();
     }
     else {
         playSound();
+        this->points++;
+        frameRateAjust(*window,*actual_frame_rate);
     }
+
+
     this->drawSnake();
 }
 
@@ -105,4 +113,13 @@ void snake::popTale() {
 
 void snake::playSound() {
     bite_sound.play();
+}
+
+void snake::frameRateAjust(sf::RenderWindow &window, int &actual_frame_rate) {
+    if(this->points % 5 == 0) {
+        actual_frame_rate += frame_rate_increment;
+        window.setFramerateLimit(actual_frame_rate);
+
+        std::cout << actual_frame_rate <<std::endl;
+    }
 }
