@@ -1,25 +1,18 @@
-  
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cstdlib>
 #include "snake.h"
 #include "food.h"
 
-
 int main() {
-    int game_refresh_rate = 15;
+    int game_refresh_rate = 10;
 
     sf::RenderWindow window(sf::VideoMode(1000,1000), "Snake");
     window.setFramerateLimit(game_refresh_rate);
     snake *viper = new snake(window);
     food *fruit = new food(window);
 
-
-    
     while(window.isOpen()) {
-
-       
-
 
         sf::Event event;
         //event polling
