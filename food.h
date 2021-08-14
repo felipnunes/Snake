@@ -8,9 +8,10 @@ class food {
     sf::RectangleShape actual_food;
     sf::RenderWindow *window_pt;
     food(sf::RenderWindow &window);
+    void refresh(int snake_x, int snake_y);
     void randomizer();
     void ate_check(int snake_x, int snake_y);
-    void refresh(int snake_x, int snake_y);
+    
 
 };
 
@@ -44,3 +45,4 @@ void food::ate_check(int snake_x, int snake_y) {
         this->ate = false;
     }
 }
+

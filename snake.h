@@ -2,11 +2,14 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
+#include <string>
 
 const int slice_size = 20;
 const int frame_rate_increment = 2;
 class snake {
     public:
+    sf::Font font;
+    sf::Text actual_pontuation_text;
     int points;
     sf::SoundBuffer bite_buffer;
     sf::Sound bite_sound;
@@ -26,9 +29,19 @@ class snake {
     void checkControls();
     void playSound();
     void frameRateAjust(sf::RenderWindow &window, int &actual_frame_rate);
+    std::string turn_int_into_text();
 };
 
 snake::snake(sf::RenderWindow &window) {
+    //inicializating actual_pontuation_text
+    font.loadFromFile("MyHandwritingSucks.ttf");
+    actual_pontuation_text.setString("0");
+    actual_pontuation_text.setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y /10));
+    actual_pontuation_text.setFont(font);
+    actual_pontuation_text.setFillColor(sf::Color::Green);
+    actual_pontuation_text.setScale(2,2);
+
+
     this->window_p = &window;
     //define inicial points
     points = 0;
@@ -60,9 +73,11 @@ void snake::refresh(float x, float y, sf::RenderWindow *window, int *actual_fram
         playSound();
         this->points++;
         frameRateAjust(*window,*actual_frame_rate);
+        actual_pontuation_text.setString(turn_int_into_text());
+        
     }
 
-
+    window->draw(this->actual_pontuation_text);
     this->drawSnake();
 }
 
@@ -122,4 +137,8 @@ void snake::frameRateAjust(sf::RenderWindow &window, int &actual_frame_rate) {
 
         std::cout << actual_frame_rate <<std::endl;
     }
+}
+
+std::string snake::turn_int_into_text() {
+    return std::to_string(this->points);
 }
