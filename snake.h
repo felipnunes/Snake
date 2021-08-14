@@ -13,7 +13,7 @@ class snake {
     int points;
     sf::SoundBuffer bite_buffer;
     sf::Sound bite_sound;
-    int snake_inicial_lenght = 8;
+    int snake_inicial_lenght = 10;
     char actual_direction = 'D';
     int head_position_x;
     int head_position_y;
@@ -144,17 +144,12 @@ std::string snake::turn_int_into_text() {
 }
 void snake::checkColision(sf::RenderWindow &window) {
 
-    // //check snake-snake colision
-    // for(int i = 0; i < this->shape.size() - 1; i++) {
-    //     if(this->shape.back().getPosition().x == this->shape[i].getPosition().x && this->shape.back().getPosition().x  == this->shape[i].getPosition().y) {
-    //         //window.close();
-    //     }
-    //     else {
-
-    //     }
-    //     std::cout << this->head_position_x<< "----" << this->shape[i].getPosition().x << ":::::" << this->head_position_y<< "----" << this->shape[i].getPosition().y << std::endl;
-    // }
-
+    //check snake-snake colision
+    for(int i = 0; i < this->shape.size()- 1; i++) {
+        if(this->shape.back().getPosition().x == this->shape[i].getPosition().x && this->shape.back().getPosition().y  == this->shape[i].getPosition().y) {
+            window.close();
+        }
+    }
 
     if(this->head_position_x >= window.getSize().x || this->head_position_x < 0 || this->head_position_y == window.getSize().y || this->head_position_y < 0) {
         window.close();
